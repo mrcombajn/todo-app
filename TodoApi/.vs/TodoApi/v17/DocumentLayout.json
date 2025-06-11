@@ -1,7 +1,28 @@
 {
   "Version": 1,
   "WorkspaceRootPath": "E:\\Projekty\\todo-asp\\TodoApi\\",
-  "Documents": [],
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{F81F345C-C749-4016-92E0-1AFFD79FE799}|TodoApi\\TodoApi.csproj|e:\\projekty\\todo-asp\\todoapi\\todoapi\\database\\todocontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{F81F345C-C749-4016-92E0-1AFFD79FE799}|TodoApi\\TodoApi.csproj|solutionrelative:todoapi\\database\\todocontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{F81F345C-C749-4016-92E0-1AFFD79FE799}|TodoApi\\TodoApi.csproj|e:\\projekty\\todo-asp\\todoapi\\todoapi\\todoapi.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|",
+      "RelativeMoniker": "D:0:0:{F81F345C-C749-4016-92E0-1AFFD79FE799}|TodoApi\\TodoApi.csproj|solutionrelative:todoapi\\todoapi.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{F81F345C-C749-4016-92E0-1AFFD79FE799}|TodoApi\\TodoApi.csproj|e:\\projekty\\todo-asp\\todoapi\\todoapi\\database\\models\\task.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{F81F345C-C749-4016-92E0-1AFFD79FE799}|TodoApi\\TodoApi.csproj|solutionrelative:todoapi\\database\\models\\task.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{F81F345C-C749-4016-92E0-1AFFD79FE799}|TodoApi\\TodoApi.csproj|e:\\projekty\\todo-asp\\todoapi\\todoapi\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{F81F345C-C749-4016-92E0-1AFFD79FE799}|TodoApi\\TodoApi.csproj|solutionrelative:todoapi\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{F81F345C-C749-4016-92E0-1AFFD79FE799}|TodoApi\\TodoApi.csproj|e:\\projekty\\todo-asp\\todoapi\\todoapi\\todoapi.http||{5703B403-55E7-4C63-8C88-A8F52C7A45C5}",
+      "RelativeMoniker": "D:0:0:{F81F345C-C749-4016-92E0-1AFFD79FE799}|TodoApi\\TodoApi.csproj|solutionrelative:todoapi\\todoapi.http||{5703B403-55E7-4C63-8C88-A8F52C7A45C5}"
+    }
+  ],
   "DocumentGroupContainers": [
     {
       "Orientation": 0,
@@ -9,11 +30,76 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": -1,
+          "SelectedChildIndex": 2,
           "Children": [
             {
               "$type": "Bookmark",
               "Name": "ST:0:0:{aa2115a1-9712-457b-9047-dbb71ca2cdd2}"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "TodoApi",
+              "DocumentMoniker": "E:\\Projekty\\todo-asp\\TodoApi\\TodoApi\\TodoApi.csproj",
+              "RelativeDocumentMoniker": "TodoApi\\TodoApi.csproj",
+              "ToolTip": "E:\\Projekty\\todo-asp\\TodoApi\\TodoApi\\TodoApi.csproj",
+              "RelativeToolTip": "TodoApi\\TodoApi.csproj",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000758|",
+              "WhenOpened": "2025-06-11T06:24:53.297Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "TodoContext.cs",
+              "DocumentMoniker": "E:\\Projekty\\todo-asp\\TodoApi\\TodoApi\\Database\\TodoContext.cs",
+              "RelativeDocumentMoniker": "TodoApi\\Database\\TodoContext.cs",
+              "ToolTip": "E:\\Projekty\\todo-asp\\TodoApi\\TodoApi\\Database\\TodoContext.cs",
+              "RelativeToolTip": "TodoApi\\Database\\TodoContext.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAeAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-06-11T06:19:37.541Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "Task.cs",
+              "DocumentMoniker": "E:\\Projekty\\todo-asp\\TodoApi\\TodoApi\\Database\\Models\\Task.cs",
+              "RelativeDocumentMoniker": "TodoApi\\Database\\Models\\Task.cs",
+              "ToolTip": "E:\\Projekty\\todo-asp\\TodoApi\\TodoApi\\Database\\Models\\Task.cs",
+              "RelativeToolTip": "TodoApi\\Database\\Models\\Task.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAoAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-06-11T05:01:26.025Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "Program.cs",
+              "DocumentMoniker": "E:\\Projekty\\todo-asp\\TodoApi\\TodoApi\\Program.cs",
+              "RelativeDocumentMoniker": "TodoApi\\Program.cs",
+              "ToolTip": "E:\\Projekty\\todo-asp\\TodoApi\\TodoApi\\Program.cs",
+              "RelativeToolTip": "TodoApi\\Program.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-06-10T22:40:06.463Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "TodoApi.http",
+              "DocumentMoniker": "E:\\Projekty\\todo-asp\\TodoApi\\TodoApi\\TodoApi.http",
+              "RelativeDocumentMoniker": "TodoApi\\TodoApi.http",
+              "ToolTip": "E:\\Projekty\\todo-asp\\TodoApi\\TodoApi\\TodoApi.http",
+              "RelativeToolTip": "TodoApi\\TodoApi.http",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003502|",
+              "WhenOpened": "2025-06-10T22:39:31.655Z",
+              "EditorCaption": ""
             }
           ]
         }
