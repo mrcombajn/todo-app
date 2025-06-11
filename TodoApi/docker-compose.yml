@@ -1,15 +1,19 @@
+version: "3.9"
+
 services:
 
   webapp:
-    image: mcr.microsoft.com/dotnet/samples:aspnetapp
+    image: build
+    build:
+      context: ./TodoApi/
+      dockerfile: Dockerfile.yml
     ports:
-      - 80
-      - 443
+      - 8000:8080
     environment:
       - ASPNETCORE_ENVIRONMENT=Development
-      - ASPNETCORE_URLS=https://+:443;http://+:80
-    volumes:
-      - ~/.aspnet/https:/https:ro
+      - ASPNETCORE_URLS=http://+:8080    
+    depends_on:
+      - db
 
   db:
     image: postgres
@@ -23,13 +27,8 @@ services:
     #    tmpfs:
     #      size: 134217728 # 128*2^20 bytes = 128Mb
     environment:
-      POSTGRES_DB: admin
+      POSTGRES_USER: admin
       POSTGRES_PASSWORD: passwd
+      POSTGRES_DB: todos
     ports:
       - 5432:5432
-
-  adminer:
-    image: adminer
-    restart: always
-    ports:
-      - 8080:8080

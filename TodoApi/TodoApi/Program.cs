@@ -1,8 +1,11 @@
 using Microsoft.EntityFrameworkCore;
+using TodoApi.Controllers;
 using TodoApi.Database;
 
 var builder = WebApplication.CreateBuilder(args);
 var connctionString = builder.Configuration.GetConnectionString("default");
+
+builder.Services.AddSingleton<WeatherForecastController>();
 
 // Add services to the container.
 builder.Services.AddDbContext<TodoContext>(db => db.UseNpgsql(connctionString));
@@ -24,6 +27,8 @@ if (app.Environment.IsDevelopment())
 app.UseHttpsRedirection();
 
 app.UseAuthorization();
+
+app.MapGet("/", (WeatherForecastController weatherForecastController) => weatherForecastController.Get());
 
 app.MapControllers();
 
