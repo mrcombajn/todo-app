@@ -1,9 +1,9 @@
 name: Deploy to VPS
 
-on:
-  push:
-    branches:
-      - main
+on: [push]
+  #push:
+   # branches:
+      #- main
 
 jobs:
   deploy:
@@ -21,6 +21,8 @@ jobs:
         echo "$SSH_PRIVATE_KEY" > ~/.ssh/id_rsa
         chmod 600 ~/.ssh/id_rsa
         ssh-keyscan -H 146.59.18.101 >> ~/.ssh/known_hosts
-        rsync -avz --delete ./TodoApi/ ubuntu>@<146.59.18.101:/var/server/
-        cd var/server/
-        docker compose up -d
+        rsync -avz -e "ssh -i ~/.ssh/id_rsa -o StrictHostKeyChecking=no" ./TodoApi/ ubuntu@146.59.18.101:/var/server/ << 'EOF'
+            set -e
+            cd ~/var/server/
+            docker compose up -d
+        EOF
