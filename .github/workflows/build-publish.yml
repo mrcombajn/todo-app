@@ -18,16 +18,18 @@ jobs:
 
     - name: Build .NET Web API
       run: dotnet build ./TodoApi/TodoApi/TodoApi.csproj --configuration Release --no-restore        
-
+          
   deploy:
     runs-on: ubuntu-latest
-    name: Deploy my nice code
-    steps:
-    - name: Deploy to OVH hosting
-      uses: pitscher/ovh-deploy-hosting-action@v1
+    name: Checkout code
+    uses: actions/checkout@v4
+    
+    - name: Copy files to VPS
       env:
-        OVH_HOSTING_USER: ${{ secrets.OVH_HOSTING_USER }}
-        OVH_HOSTING_PASSWORD: ${{ secrets.OVH_HOSTING_PASSWORD }}
-        OVH_HOSTING_DOMAIN: vps-5f245e44.vps.ovh.net
-        REPOSITORY_NAME: todo-app
-        REPOSITORY_URL: https://github.com/mrcombajn/todo-app.git
+        SSH_PRIVATE_KEY: ${{ secrets.VPS_PRIVATE_KEY }}
+      run: |
+        mkdir -p ~/.ssh
+        echo "$SSH_PRIVATE_KEY" > ~/.ssh/id_rsa
+        chmod 600 ~/.ssh/id_rsa
+        ssh-keyscan -H 146.59.18.101 >> ~/.ssh/known_hosts
+        rsync -avz --delete ./ ubuntu>@<146.59.18.101:/var/www/html/
