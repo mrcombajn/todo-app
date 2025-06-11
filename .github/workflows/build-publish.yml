@@ -1,6 +1,24 @@
 on: [push]
 
 jobs:
+  build:
+
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v4
+
+    - name: Setup .NET
+      uses: actions/setup-dotnet@v4
+      with:
+        dotnet-version: '8.0.x'
+        
+    - name: Restore .NET dependencies
+      run: dotnet restore ./TodoApi/TodoApi/TodoApi.csproj
+
+    - name: Build .NET Web API
+      run: dotnet build ./TodoApi/TodoApi/TodoApi.csproj --configuration Release --no-restore        
+
   deploy:
     runs-on: ubuntu-latest
     name: Deploy my nice code
