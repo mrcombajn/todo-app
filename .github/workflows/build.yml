@@ -1,4 +1,4 @@
-name: Deploy to VPS
+name: Build solution
 
 on: [push]
 
