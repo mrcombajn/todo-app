@@ -21,6 +21,6 @@ jobs:
         echo "$SSH_PRIVATE_KEY" > ~/.ssh/id_rsa
         chmod 600 ~/.ssh/id_rsa
         ssh-keyscan -H 146.59.18.101 >> ~/.ssh/known_hosts
-        rsync -avz -e "ssh -i ~/.ssh/id_rsa -o StrictHostKeyChecking=no" ./TodoApi/ ubuntu@146.59.18.101:/var/server
+        rsync -avz -e "ssh -i ~/.ssh/id_rsa -o StrictHostKeyChecking=no" ./TodoApi/ ubuntu@146.59.18.101:/var/server/
         cd var/server/
         docker compose up -d
