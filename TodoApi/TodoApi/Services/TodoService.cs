@@ -12,14 +12,22 @@ namespace TodoApi.Services
             _todoContext = todoContext;
         }
 
-        public List<Todo> GetTodos()
+        public List<Todo> GetTodosByDate(DateTime dateTime)
         {
             return _todoContext.Todos.ToList();
         }
 
-        public void AddTodo(Todo todo)
+        public void AddTodo(Todo todo) => _todoContext.Todos.Update(todo);
+  
+        public void RemoveTodoById(int id)
         {
-            _todoContext.Todos.Add(todo);
+            var todo = _todoContext.Todos.Find(id);
+
+            if (todo != null)
+            {
+                _todoContext.Remove(todo);
+                _todoContext.SaveChanges();
+            }
         }
     }
 }

@@ -12,7 +12,7 @@ namespace TodoApi.Database.Models
         [Required]
         public string Description { get; set; }
 
-        public DateTime DueDate { get; set; }
+        public DateOnly Day { get; set; }
 
         public DateTime CreatedDate { get; set; }
     }
