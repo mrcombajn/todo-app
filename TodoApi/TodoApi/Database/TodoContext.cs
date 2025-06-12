@@ -11,7 +11,7 @@ namespace TodoApi.Database
         {          
         }
 
-        public DbSet<Todo> Tasks => Set<Todo>();
+        public DbSet<Todo> Todos => Set<Todo>();
 
     }
 }

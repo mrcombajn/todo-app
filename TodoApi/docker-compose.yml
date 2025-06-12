@@ -1,34 +1,43 @@
 version: "3.9"
 
 services:
+  db:
+    image: postgres:16
+    restart: always
+    shm_size: 128mb
+    environment:
+      POSTGRES_USER: admin
+      POSTGRES_PASSWORD: passwd
+      POSTGRES_DB: TodoDb
+    ports:
+      - "5432:5432"
+    networks:
+      - backend
 
   webapp:
-    image: build
     build:
       context: ./TodoApi/
       dockerfile: Dockerfile.yml
     ports:
-      - 8000:8080
+      - "8000:8080"
     environment:
       - ASPNETCORE_ENVIRONMENT=Development
-      - ASPNETCORE_URLS=http://+:8080    
+      - ASPNETCORE_URLS=http://+:8080
+      - ConnectionStrings__DefaultConnection=Host=db;Port=5432;Database=TodoDb;Username=admin;Password=passwd
+    networks:
+      - backend
+    command: >
+      sh -c "
+        until pg_isready -h db -p 5432; do
+          echo 'Waiting for PostgreSQL...';
+          sleep 2;
+        done;
+        dotnet ef migration add MigrationAsContainerStarts;
+        dotnet ef database update;
+        dotnet TodoApi.dll
+      "
     depends_on:
       - db
 
-  db:
-    image: postgres
-    restart: always
-    # set shared memory limit when using docker compose
-    shm_size: 128mb
-    # or set shared memory limit when deploy via swarm stack
-    #volumes:
-    #  - type: tmpfs
-    #    target: /dev/shm
-    #    tmpfs:
-    #      size: 134217728 # 128*2^20 bytes = 128Mb
-    environment:
-      POSTGRES_USER: admin
-      POSTGRES_PASSWORD: passwd
-      POSTGRES_DB: todos
-    ports:
-      - 5432:5432
+networks:
+  backend:
