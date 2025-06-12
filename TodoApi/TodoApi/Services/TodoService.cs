@@ -1,5 +1,6 @@
 ﻿using TodoApi.Database;
 using TodoApi.Database.Dto;
+using TodoApi.Database.Enums;
 using TodoApi.Database.Models;
 
 namespace TodoApi.Services
@@ -13,9 +14,16 @@ namespace TodoApi.Services
             _todoContext = todoContext;
         }
 
-        public List<Todo> GetTodosByDate(DateOnly date)
+        public List<Todo> GetAllTodosByDate(DateOnly date)
         {
             return _todoContext.Todos.ToList();
+        }
+
+        public List<Todo> GetActiveTodosByDate(DateOnly date)
+        {
+            return GetTodosByState(State.ACTIVE)
+                .Where(todo => todo.Date == date)
+                .ToList();
         }
 
         public Todo AddTodo(TodoDto dto)
@@ -39,5 +47,8 @@ namespace TodoApi.Services
                 _todoContext.SaveChanges();
             }
         }
+
+        private IQueryable<Todo> GetTodosByState(State state) => _todoContext.Todos.Where(todo => todo.State == state);
+
     }
 }

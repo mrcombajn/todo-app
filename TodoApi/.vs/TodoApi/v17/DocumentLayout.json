@@ -3,6 +3,30 @@
   "WorkspaceRootPath": "E:\\Projekty\\todo-asp\\TodoApi\\",
   "Documents": [
     {
+      "AbsoluteMoniker": "D:0:0:{F81F345C-C749-4016-92E0-1AFFD79FE799}|TodoApi\\TodoApi.csproj|e:\\projekty\\todo-asp\\todoapi\\todoapi\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{F81F345C-C749-4016-92E0-1AFFD79FE799}|TodoApi\\TodoApi.csproj|solutionrelative:todoapi\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{F81F345C-C749-4016-92E0-1AFFD79FE799}|TodoApi\\TodoApi.csproj|e:\\projekty\\todo-asp\\todoapi\\todoapi\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
+      "RelativeMoniker": "D:0:0:{F81F345C-C749-4016-92E0-1AFFD79FE799}|TodoApi\\TodoApi.csproj|solutionrelative:todoapi\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{F81F345C-C749-4016-92E0-1AFFD79FE799}|TodoApi\\TodoApi.csproj|e:\\projekty\\todo-asp\\todoapi\\todoapi\\dockerfile.yml||{8B382828-6202-11D1-8870-0000F87579D2}",
+      "RelativeMoniker": "D:0:0:{F81F345C-C749-4016-92E0-1AFFD79FE799}|TodoApi\\TodoApi.csproj|solutionrelative:todoapi\\dockerfile.yml||{8B382828-6202-11D1-8870-0000F87579D2}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{F81F345C-C749-4016-92E0-1AFFD79FE799}|TodoApi\\TodoApi.csproj|e:\\projekty\\todo-asp\\todoapi\\todoapi\\appsettings.development.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
+      "RelativeMoniker": "D:0:0:{F81F345C-C749-4016-92E0-1AFFD79FE799}|TodoApi\\TodoApi.csproj|solutionrelative:todoapi\\appsettings.development.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{F81F345C-C749-4016-92E0-1AFFD79FE799}|TodoApi\\TodoApi.csproj|e:\\projekty\\todo-asp\\todoapi\\todoapi\\services\\todoservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{F81F345C-C749-4016-92E0-1AFFD79FE799}|TodoApi\\TodoApi.csproj|solutionrelative:todoapi\\services\\todoservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{F81F345C-C749-4016-92E0-1AFFD79FE799}|TodoApi\\TodoApi.csproj|e:\\projekty\\todo-asp\\todoapi\\todoapi\\database\\models\\todo.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{F81F345C-C749-4016-92E0-1AFFD79FE799}|TodoApi\\TodoApi.csproj|solutionrelative:todoapi\\database\\models\\todo.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
       "AbsoluteMoniker": "D:0:0:{F81F345C-C749-4016-92E0-1AFFD79FE799}|TodoApi\\TodoApi.csproj|e:\\projekty\\todo-asp\\todoapi\\todoapi\\database\\todocontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{F81F345C-C749-4016-92E0-1AFFD79FE799}|TodoApi\\TodoApi.csproj|solutionrelative:todoapi\\database\\todocontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
@@ -11,16 +35,8 @@
       "RelativeMoniker": "D:0:0:{F81F345C-C749-4016-92E0-1AFFD79FE799}|TodoApi\\TodoApi.csproj|solutionrelative:todoapi\\todoapi.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{F81F345C-C749-4016-92E0-1AFFD79FE799}|TodoApi\\TodoApi.csproj|e:\\projekty\\todo-asp\\todoapi\\todoapi\\database\\models\\task.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{F81F345C-C749-4016-92E0-1AFFD79FE799}|TodoApi\\TodoApi.csproj|solutionrelative:todoapi\\database\\models\\task.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{F81F345C-C749-4016-92E0-1AFFD79FE799}|TodoApi\\TodoApi.csproj|e:\\projekty\\todo-asp\\todoapi\\todoapi\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{F81F345C-C749-4016-92E0-1AFFD79FE799}|TodoApi\\TodoApi.csproj|solutionrelative:todoapi\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{F81F345C-C749-4016-92E0-1AFFD79FE799}|TodoApi\\TodoApi.csproj|e:\\projekty\\todo-asp\\todoapi\\todoapi\\todoapi.http||{5703B403-55E7-4C63-8C88-A8F52C7A45C5}",
-      "RelativeMoniker": "D:0:0:{F81F345C-C749-4016-92E0-1AFFD79FE799}|TodoApi\\TodoApi.csproj|solutionrelative:todoapi\\todoapi.http||{5703B403-55E7-4C63-8C88-A8F52C7A45C5}"
+      "AbsoluteMoniker": "D:0:0:{F81F345C-C749-4016-92E0-1AFFD79FE799}|TodoApi\\TodoApi.csproj|e:\\projekty\\todo-asp\\todoapi\\todoapi\\properties\\launchsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
+      "RelativeMoniker": "D:0:0:{F81F345C-C749-4016-92E0-1AFFD79FE799}|TodoApi\\TodoApi.csproj|solutionrelative:todoapi\\properties\\launchsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
     }
   ],
   "DocumentGroupContainers": [
@@ -30,75 +46,125 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 2,
+          "SelectedChildIndex": 9,
           "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 7,
+              "Title": "TodoApi.csproj",
+              "DocumentMoniker": "E:\\Projekty\\todo-asp\\TodoApi\\TodoApi\\TodoApi.csproj",
+              "RelativeDocumentMoniker": "TodoApi\\TodoApi.csproj",
+              "ToolTip": "E:\\Projekty\\todo-asp\\TodoApi\\TodoApi\\TodoApi.csproj",
+              "RelativeToolTip": "TodoApi\\TodoApi.csproj",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABMAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000758|",
+              "WhenOpened": "2025-06-11T06:24:53.297Z",
+              "IsPinned": true
+            },
             {
               "$type": "Bookmark",
               "Name": "ST:0:0:{aa2115a1-9712-457b-9047-dbb71ca2cdd2}"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
-              "Title": "TodoApi",
-              "DocumentMoniker": "E:\\Projekty\\todo-asp\\TodoApi\\TodoApi\\TodoApi.csproj",
-              "RelativeDocumentMoniker": "TodoApi\\TodoApi.csproj",
-              "ToolTip": "E:\\Projekty\\todo-asp\\TodoApi\\TodoApi\\TodoApi.csproj",
-              "RelativeToolTip": "TodoApi\\TodoApi.csproj",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAABAAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000758|",
-              "WhenOpened": "2025-06-11T06:24:53.297Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 0,
-              "Title": "TodoContext.cs",
-              "DocumentMoniker": "E:\\Projekty\\todo-asp\\TodoApi\\TodoApi\\Database\\TodoContext.cs",
-              "RelativeDocumentMoniker": "TodoApi\\Database\\TodoContext.cs",
-              "ToolTip": "E:\\Projekty\\todo-asp\\TodoApi\\TodoApi\\Database\\TodoContext.cs",
-              "RelativeToolTip": "TodoApi\\Database\\TodoContext.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAeAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-06-11T06:19:37.541Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
               "DocumentIndex": 2,
-              "Title": "Task.cs",
-              "DocumentMoniker": "E:\\Projekty\\todo-asp\\TodoApi\\TodoApi\\Database\\Models\\Task.cs",
-              "RelativeDocumentMoniker": "TodoApi\\Database\\Models\\Task.cs",
-              "ToolTip": "E:\\Projekty\\todo-asp\\TodoApi\\TodoApi\\Database\\Models\\Task.cs",
-              "RelativeToolTip": "TodoApi\\Database\\Models\\Task.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAoAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-06-11T05:01:26.025Z",
+              "Title": "Dockerfile.yml",
+              "DocumentMoniker": "E:\\Projekty\\todo-asp\\TodoApi\\TodoApi\\Dockerfile.yml",
+              "RelativeDocumentMoniker": "TodoApi\\Dockerfile.yml",
+              "ToolTip": "E:\\Projekty\\todo-asp\\TodoApi\\TodoApi\\Dockerfile.yml",
+              "RelativeToolTip": "TodoApi\\Dockerfile.yml",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003775|",
+              "WhenOpened": "2025-06-11T22:39:49.845Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 3,
-              "Title": "Program.cs",
-              "DocumentMoniker": "E:\\Projekty\\todo-asp\\TodoApi\\TodoApi\\Program.cs",
-              "RelativeDocumentMoniker": "TodoApi\\Program.cs",
-              "ToolTip": "E:\\Projekty\\todo-asp\\TodoApi\\TodoApi\\Program.cs",
-              "RelativeToolTip": "TodoApi\\Program.cs",
+              "Title": "appsettings.Development.json",
+              "DocumentMoniker": "E:\\Projekty\\todo-asp\\TodoApi\\TodoApi\\appsettings.Development.json",
+              "RelativeDocumentMoniker": "TodoApi\\appsettings.Development.json",
+              "ToolTip": "E:\\Projekty\\todo-asp\\TodoApi\\TodoApi\\appsettings.Development.json",
+              "RelativeToolTip": "TodoApi\\appsettings.Development.json",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-06-10T22:40:06.463Z",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
+              "WhenOpened": "2025-06-11T22:36:54.66Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 4,
-              "Title": "TodoApi.http",
-              "DocumentMoniker": "E:\\Projekty\\todo-asp\\TodoApi\\TodoApi\\TodoApi.http",
-              "RelativeDocumentMoniker": "TodoApi\\TodoApi.http",
-              "ToolTip": "E:\\Projekty\\todo-asp\\TodoApi\\TodoApi\\TodoApi.http",
-              "RelativeToolTip": "TodoApi\\TodoApi.http",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003502|",
-              "WhenOpened": "2025-06-10T22:39:31.655Z",
+              "Title": "TodoService.cs",
+              "DocumentMoniker": "E:\\Projekty\\todo-asp\\TodoApi\\TodoApi\\Services\\TodoService.cs",
+              "RelativeDocumentMoniker": "TodoApi\\Services\\TodoService.cs",
+              "ToolTip": "E:\\Projekty\\todo-asp\\TodoApi\\TodoApi\\Services\\TodoService.cs",
+              "RelativeToolTip": "TodoApi\\Services\\TodoService.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAvwA0AAAAYAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-06-11T22:31:14.983Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "TodoContext.cs",
+              "DocumentMoniker": "E:\\Projekty\\todo-asp\\TodoApi\\TodoApi\\Database\\TodoContext.cs",
+              "RelativeDocumentMoniker": "TodoApi\\Database\\TodoContext.cs",
+              "ToolTip": "E:\\Projekty\\todo-asp\\TodoApi\\TodoApi\\Database\\TodoContext.cs",
+              "RelativeToolTip": "TodoApi\\Database\\TodoContext.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA0AAAAwAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-06-11T22:30:20.413Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "Todo.cs",
+              "DocumentMoniker": "E:\\Projekty\\todo-asp\\TodoApi\\TodoApi\\Database\\Models\\Todo.cs",
+              "RelativeDocumentMoniker": "TodoApi\\Database\\Models\\Todo.cs",
+              "ToolTip": "E:\\Projekty\\todo-asp\\TodoApi\\TodoApi\\Database\\Models\\Todo.cs",
+              "RelativeToolTip": "TodoApi\\Database\\Models\\Todo.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA8AAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-06-11T21:37:44.073Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 8,
+              "Title": "launchSettings.json",
+              "DocumentMoniker": "E:\\Projekty\\todo-asp\\TodoApi\\TodoApi\\Properties\\launchSettings.json",
+              "RelativeDocumentMoniker": "TodoApi\\Properties\\launchSettings.json",
+              "ToolTip": "E:\\Projekty\\todo-asp\\TodoApi\\TodoApi\\Properties\\launchSettings.json",
+              "RelativeToolTip": "TodoApi\\Properties\\launchSettings.json",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAACIAAAAdAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
+              "WhenOpened": "2025-06-11T20:37:32.328Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "appsettings.json",
+              "DocumentMoniker": "E:\\Projekty\\todo-asp\\TodoApi\\TodoApi\\appsettings.json",
+              "RelativeDocumentMoniker": "TodoApi\\appsettings.json",
+              "ToolTip": "E:\\Projekty\\todo-asp\\TodoApi\\TodoApi\\appsettings.json",
+              "RelativeToolTip": "TodoApi\\appsettings.json",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAkAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
+              "WhenOpened": "2025-06-11T06:31:24.853Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "Program.cs",
+              "DocumentMoniker": "E:\\Projekty\\todo-asp\\TodoApi\\TodoApi\\Program.cs",
+              "RelativeDocumentMoniker": "TodoApi\\Program.cs",
+              "ToolTip": "E:\\Projekty\\todo-asp\\TodoApi\\TodoApi\\Program.cs",
+              "RelativeToolTip": "TodoApi\\Program.cs",
+              "ViewState": "AgIAAA8AAAAAAAAAAAAAABMAAAAnAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-06-10T22:40:06.463Z",
               "EditorCaption": ""
             }
           ]

@@ -22,7 +22,7 @@ namespace TodoApi.Controllers
         [HttpGet]
         public ActionResult GetTodosByDate(DateOnly date)
         {
-            return Ok(todoService.GetTodosByDate(date));
+            return Ok(todoService.GetActiveTodosByDate(date));
         }
 
         [HttpPost]

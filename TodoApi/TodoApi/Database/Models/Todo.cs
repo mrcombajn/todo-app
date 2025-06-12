@@ -1,5 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using TodoApi.Database.Dto;
+using TodoApi.Database.Enums;
 
 namespace TodoApi.Database.Models
 {
@@ -17,6 +18,8 @@ namespace TodoApi.Database.Models
 
         public DateTime CreatedDate { get; set; }
 
+        public State State {  get; set; }
+
         public static Todo CreateTodoFromDto(TodoDto dto)
         {
             return new Todo()
@@ -24,6 +27,7 @@ namespace TodoApi.Database.Models
                 Title = dto.Title,
                 Description = dto.Description,
                 Date = dto.Date,
+                State = State.ACTIVE,
                 CreatedDate = DateTime.UtcNow,
             };
         }
