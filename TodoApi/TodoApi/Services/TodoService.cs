@@ -1,4 +1,5 @@
 ﻿using TodoApi.Database;
+using TodoApi.Database.Dto;
 using TodoApi.Database.Models;
 
 namespace TodoApi.Services
@@ -12,13 +13,22 @@ namespace TodoApi.Services
             _todoContext = todoContext;
         }
 
-        public List<Todo> GetTodosByDate(DateTime dateTime)
+        public List<Todo> GetTodosByDate(DateOnly date)
         {
             return _todoContext.Todos.ToList();
         }
 
-        public void AddTodo(Todo todo) => _todoContext.Todos.Update(todo);
-  
+        public Todo AddTodo(TodoDto dto)
+        {
+            var todo = Todo.CreateTodoFromDto(dto);
+
+            _todoContext.Todos.Add(todo);
+            _todoContext.SaveChanges();
+
+            return todo;
+        }
+
+
         public void RemoveTodoById(int id)
         {
             var todo = _todoContext.Todos.Find(id);
