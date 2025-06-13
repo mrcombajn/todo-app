@@ -1,9 +1,9 @@
 name: Deploy to VPS
 
 on: [push]
-  #push:
-   # branches:
-      #- main
+  push:
+    branches:
+      - main
 
 jobs:
   deploy:

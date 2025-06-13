@@ -1,47 +1,105 @@
 <script setup>
-import HelloWorld from './components/HelloWorld.vue'
-import TheWelcome from './components/TheWelcome.vue'
+
+import { ref, onMounted } from 'vue'
+import axios from 'axios'
+import Todo from './components/Todo.vue';
+
 </script>
 
 <template>
-  <header>
-    <img alt="Vue logo" class="logo" src="./assets/logo.svg" width="125" height="125" />
+  <nav>
+    <section id="title">Todo list by Mateusz Ostrowski</section>
+    <section id="image">
+      <input type="text" value="Wpisz date"/>
+      <button v-on:click="fetchTodos">Klik</button>
+      <img src="./components/icons/bell.png" alt="notification-icon">
+    </section>
+  </nav>
 
-    <div class="wrapper">
-      <HelloWorld msg="You did it!" />
-    </div>
-  </header>
-
-  <main>
-    <TheWelcome />
+  <main id="main">
+    <section v-if="todos.length == 0">Ups! niczego tutaj nie ma :/ Dodaj nowe zadanie</section>
+    <section v-else>
+      <Todo v-for="todo in todos"
+         :title="todo.title"
+         :description="todo.description"
+         :date="todo.date"
+         v-on:emitDeleteTodo="deleteTodo(todo.id)"
+         v-on:emitEditTodo="editTodo"></Todo>
+    </section>
   </main>
 </template>
 
+<script>
+  export default {
+    data() {
+      return {
+        todos: []
+      }
+    },
+    components: {
+      Todo
+    },
+    methods: {
+      async fetchTodos() {
+        try {
+          const response = await axios.get('/api/todos', {
+              params: { date: '2025-06-13' }
+          })
+          this.todos = response.data
+        }
+        catch (error) {
+          console.error('Błąd podczas pobierania danych:', error)
+        }
+      },
+      deleteTodo(id) {
+        axios.delete('api/todos', {
+          params: { id: id }
+        })
+
+        this.todos = this.todos.filter(item => item.id != id)
+      },
+      editTodo() {
+        
+      }
+    } 
+  }
+</script>
+
 <style scoped>
-header {
-  line-height: 1.5;
+nav {
+  display: inline-flex;
+  margin: 0;
+  background-color: #2AACE6;
+  width: 100%;
+  padding: 10;
+  color: black;
 }
 
-.logo {
-  display: block;
-  margin: 0 auto 2rem;
+section {
+  padding: 10px;
+  letter-spacing: 1.5px;
 }
 
-@media (min-width: 1024px) {
-  header {
-    display: flex;
-    place-items: center;
-    padding-right: calc(var(--section-gap) / 2);
-  }
-
-  .logo {
-    margin: 0 2rem 0 0;
-  }
-
-  header .wrapper {
-    display: flex;
-    place-items: flex-start;
-    flex-wrap: wrap;
-  }
+section#title {
+  color: white;
+  width: 25%;
 }
+
+section#image {
+  display: flex;
+  justify-content: flex-end;
+  width: 75%;
+}
+
+section > img {
+  height: 24px;
+  width: 24px;
+}
+
+main {
+  display: flex;
+  justify-content: center;
+  color: black;
+}
+
 </style>
