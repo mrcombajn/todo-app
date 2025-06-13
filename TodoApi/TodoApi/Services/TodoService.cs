@@ -37,7 +37,7 @@ namespace TodoApi.Services
         }
 
 
-        public void RemoveTodoById(int id)
+        public Todo RemoveTodoById(int id)
         {
             var todo = _todoContext.Todos.Find(id);
 
@@ -46,6 +46,7 @@ namespace TodoApi.Services
                 _todoContext.Remove(todo);
                 _todoContext.SaveChanges();
             }
+            return todo;
         }
 
         private IQueryable<Todo> GetTodosByState(State state) => _todoContext.Todos.Where(todo => todo.State == state);

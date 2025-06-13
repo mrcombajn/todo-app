@@ -28,22 +28,13 @@ namespace TodoApi.Controllers
         [HttpPost]
         public ActionResult AddTodo(TodoDto dto) => Ok(todoService.AddTodo(dto));
 
-/*        [HttpDelete]
+        [HttpDelete]
         public ActionResult RemoveTodoById(int id)
         {
-            var todo = _todoContext.Todos.Find(id);
-
-            if (todo != null)
-            {
-                _todoContext.Remove(todo);
-                _todoContext.SaveChanges();
-
-                return Ok();
-            }
-
-            return BadRequest();
+            return Ok(todoService.RemoveTodoById(id));
         }
 
+        /*
         [HttpPut]
         [app]
         public void UpdateTodo()
