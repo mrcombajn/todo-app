@@ -1,8 +1,6 @@
-﻿using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using TodoApi.Database;
 using TodoApi.Database.Dto;
-using TodoApi.Database.Models;
 using TodoApi.Services;
 
 namespace TodoApi.Controllers
@@ -34,12 +32,10 @@ namespace TodoApi.Controllers
             return Ok(todoService.RemoveTodoById(id));
         }
 
-        /*
         [HttpPut]
-        [app]
-        public void UpdateTodo()
+        public ActionResult UpdateTodo([FromBody] TodoDto dto)
         {
-
-        }*/
+            return Ok(todoService.UpdateTodo(dto));
+        }
     }
 }

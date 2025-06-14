@@ -2,7 +2,8 @@
 
 import { ref, onMounted } from 'vue'
 import axios from 'axios'
-import Todo from './components/Todo.vue';
+import Todos from './components/Todos.vue';
+import VueDatePicker from '@vuepic/vue-datepicker';
 
 </script>
 
@@ -10,22 +11,19 @@ import Todo from './components/Todo.vue';
   <nav>
     <section id="title">Todo list by Mateusz Ostrowski</section>
     <section id="image">
-      <input type="text" value="Wpisz date"/>
-      <button v-on:click="fetchTodos">Klik</button>
       <img src="./components/icons/bell.png" alt="notification-icon">
     </section>
   </nav>
 
-  <main id="main">
-    <section v-if="todos.length == 0">Ups! niczego tutaj nie ma :/ Dodaj nowe zadanie</section>
-    <section v-else>
-      <Todo v-for="todo in todos"
-         :title="todo.title"
-         :description="todo.description"
-         :date="todo.date"
-         v-on:emitDeleteTodo="deleteTodo(todo.id)"
-         v-on:emitEditTodo="editTodo"></Todo>
-    </section>
+  <main>
+    <header id="todo-header">
+      <h1>Zadania</h1>
+      <section id="todo-header-datepicker">  
+        <section> Wybierz dzień: </section>
+        <VueDatePicker v-model="date" @update:modelValue="fetchTodos" auto-apply :enable-time-picker="false"/>
+      </section>
+    </header>
+    <Todos :todos="todos" @deleteTodoFromDb="deleteTodo" @editTodoInDb="editTodo"/>
   </main>
 </template>
 
@@ -33,23 +31,28 @@ import Todo from './components/Todo.vue';
   export default {
     data() {
       return {
-        todos: []
+        todos: [],
+        date: new Date()
       }
     },
     components: {
-      Todo
+      Todos
     },
     methods: {
       async fetchTodos() {
         try {
           const response = await axios.get('/api/todos', {
-              params: { date: '2025-06-13' }
+              params: { date: this.prepareCorrectDate() }
           })
           this.todos = response.data
         }
         catch (error) {
           console.error('Błąd podczas pobierania danych:', error)
         }
+      },
+      prepareCorrectDate() {
+          var newDate =  this.date.getFullYear() + '-' + (this.date.getMonth() + 1) + '-' + this.date.getDate()
+          return newDate
       },
       deleteTodo(id) {
         axios.delete('api/todos', {
@@ -58,10 +61,31 @@ import Todo from './components/Todo.vue';
 
         this.todos = this.todos.filter(item => item.id != id)
       },
-      editTodo() {
-        
-      }
-    } 
+      async editTodo(id, todoData) {
+        const dto = {
+          id: id,
+          title: todoData.title,
+          description: todoData.description,
+          date: this.prepareCorrectDate()
+        }
+        console.log(JSON.stringify(dto, null, 2))
+        try {
+          await axios.put('/api/todos',{ 
+            id: id,
+            title: todoData.title,
+            description: todoData.description,
+            date: this.prepareCorrectDate()
+          })
+        } catch(error) {
+          console.error('Błąd podczas pobierania danych:', error)
+        }
+
+        this.fetchTodos()
+      },
+    },
+    mounted() {
+      this.fetchTodos()
+    }
   }
 </script>
 
@@ -75,14 +99,11 @@ nav {
   color: black;
 }
 
-section {
-  padding: 10px;
-  letter-spacing: 1.5px;
-}
-
 section#title {
   color: white;
   width: 25%;
+  padding: 10px;
+  letter-spacing: 1.5px;
 }
 
 section#image {
@@ -98,8 +119,25 @@ section > img {
 
 main {
   display: flex;
-  justify-content: center;
+  flex-direction: column;
+  width: 70%;
+  margin-left: auto;
+  margin-right: auto;
+  align-items: center;
   color: black;
+  justify-content: flex-start;
+}
+
+#todo-header {
+  display: flex;
+  flex-direction: column;
+}
+
+#todo-header-datepicker {
+  display: flex;
+  align-items: center;
+  flex-direction: row;
+  -ms-flex-align: end;
 }
 
 </style>
