@@ -2,7 +2,12 @@
     <main>
         <section v-if="todos.length == 0">Ups! niczego tutaj nie ma :/ Dodaj nowe zadanie</section>
         <section v-if="isAddingTodo">
-            <Todo :isAdding="true"/>
+            <template v-if="isAddingTodo">
+                <input v-model="editableTitle" class="edit-input" />
+                <textarea v-model="editableDescription" class="edit-textarea"></textarea>
+                <button class="save-btn" @click="saveChanges">Zapisz</button>
+                <button class="cancel-btn" @click="cancelAdd">Anuluj</button>
+            </template>
         </section>
         <section v-else>
         <Todo v-for="todo in todos"
@@ -21,7 +26,9 @@
     export default {
         data() {
             return {
-                isAddingTodo: false
+                isAddingTodo: false,
+                editableTitle: "",
+                editableDescription: ""
             }
         },
         props: ['todos'],
@@ -31,6 +38,15 @@
         methods: {
             triggerAddTodo() {
                 this.isAddingTodo = true
+                console.log(this.isAddingTodo)
+            },
+            saveChanges() {
+                this.$emit("saveTodoInDb", this.editableTitle, this.editableDescription)
+                this.isAddingTodo = false
+            }
+            ,
+            cancelAdd() {
+                this.isAddingTodo = false
             }
         }
     }

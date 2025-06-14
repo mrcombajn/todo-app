@@ -24,7 +24,7 @@ namespace TodoApi.Controllers
         }
 
         [HttpPost]
-        public ActionResult AddTodo(TodoDto dto) => Ok(todoService.AddTodo(dto));
+        public ActionResult AddTodo([FromBody] TodoDto dto) => Ok(todoService.AddTodo(dto));
 
         [HttpDelete]
         public ActionResult RemoveTodoById(int id)

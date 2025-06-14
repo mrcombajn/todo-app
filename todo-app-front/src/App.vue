@@ -24,7 +24,7 @@ import VueDatePicker from '@vuepic/vue-datepicker';
         <button @click="triggerAddTodo">Dodaj zadanie</button>
       </section>
     </header>
-    <Todos ref="todos" :todos="todos" @deleteTodoFromDb="deleteTodo" @editTodoInDb="editTodo"/>
+    <Todos ref="todos" :todos="todos" @deleteTodoFromDb="deleteTodo" @editTodoInDb="editTodo" @saveTodoInDb="saveTodo" />
   </main>
 </template>
 
@@ -86,6 +86,21 @@ import VueDatePicker from '@vuepic/vue-datepicker';
               description: todoData.description
             } : todo
           )
+
+          this.fetchTodos()
+        } catch(error) {
+          console.error('Błąd podczas pobierania danych:', error)
+        }
+      },
+      async saveTodo(title, description) {
+        
+
+        try {
+          await axios.post('/api/todos', {
+            title: title,
+            description: description,
+            date: this.prepareCorrectDate()
+          }).catch(error => console.log(error.response))
 
           this.fetchTodos()
         } catch(error) {
