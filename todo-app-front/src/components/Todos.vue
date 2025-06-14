@@ -1,6 +1,5 @@
 <template>
     <main>
-        <section v-if="todos.length == 0">Ups! niczego tutaj nie ma :/ Dodaj nowe zadanie</section>
         <section v-if="isAddingTodo">
             <template v-if="isAddingTodo">
                 <input v-model="editableTitle" class="edit-input" />
@@ -9,6 +8,7 @@
                 <button class="cancel-btn" @click="cancelAdd">Anuluj</button>
             </template>
         </section>
+        <section v-if="todos.length == 0 && !isAddingTodo">Ups! niczego tutaj nie ma :/ Dodaj nowe zadanie</section>
         <section v-else>
         <Todo v-for="todo in todos"
             :title="todo.title"

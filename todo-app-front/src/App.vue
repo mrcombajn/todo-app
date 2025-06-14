@@ -4,14 +4,15 @@ import { ref, onMounted } from 'vue'
 import axios from 'axios'
 import Todos from './components/Todos.vue';
 import VueDatePicker from '@vuepic/vue-datepicker';
+import Notifications from './components/Notifications.vue';
 
 </script>
 
 <template>
   <nav>
     <section id="title">Todo list by Mateusz Ostrowski</section>
-    <section id="image">
-      <img src="./components/icons/bell.png" alt="notification-icon">
+    <section>
+      <Notifications :todos="todos"/>
     </section>
   </nav>
 
@@ -20,7 +21,7 @@ import VueDatePicker from '@vuepic/vue-datepicker';
       <h1>Zadania</h1>
       <section id="todo-header-datepicker">  
         <section> Wybierz dzień: </section>
-        <VueDatePicker v-model="date" @update:modelValue="fetchTodos" auto-apply :enable-time-picker="false"/>
+        <VueDatePicker v-model="date" @update:modelValue="fetchTodos" auto-apply/>
         <button @click="triggerAddTodo">Dodaj zadanie</button>
       </section>
     </header>
@@ -45,6 +46,7 @@ import VueDatePicker from '@vuepic/vue-datepicker';
           const response = await axios.get('/api/todos', {
               params: { date: this.prepareCorrectDate() }
           })
+
           this.todos = response.data
         }
         catch (error) {
@@ -77,7 +79,7 @@ import VueDatePicker from '@vuepic/vue-datepicker';
             title: todoData.title,
             description: todoData.description,
             date: this.prepareCorrectDate()
-          }).catch(error => console.log(error.response))
+          })
 
           this.todos.map(todo =>
             todo.id === id ? {
@@ -93,19 +95,20 @@ import VueDatePicker from '@vuepic/vue-datepicker';
         }
       },
       async saveTodo(title, description) {
-        
-
         try {
           await axios.post('/api/todos', {
             title: title,
             description: description,
             date: this.prepareCorrectDate()
-          }).catch(error => console.log(error.response))
+          })
 
           this.fetchTodos()
         } catch(error) {
-          console.error('Błąd podczas pobierania danych:', error)
+          console.error('Błąd podczas zapisywania danych:', error)
         }
+      },
+      checkUpcomingTasks() {
+
       },
       triggerAddTodo() {
         this.$refs.todos.triggerAddTodo()
@@ -113,6 +116,7 @@ import VueDatePicker from '@vuepic/vue-datepicker';
     },
     mounted() {
       this.fetchTodos()
+      this.interval = setInterval(this.checkUpcomingTasks, 60000)
     }
   }
 </script>
@@ -132,12 +136,6 @@ section#title {
   width: 25%;
   padding: 10px;
   letter-spacing: 1.5px;
-}
-
-section#image {
-  display: flex;
-  justify-content: flex-end;
-  width: 75%;
 }
 
 section > img {
