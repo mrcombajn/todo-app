@@ -51,5 +51,21 @@ namespace TodoApi.Services
 
         private IQueryable<Todo> GetTodosByState(State state) => _todoContext.Todos.Where(todo => todo.State == state);
 
+        public Todo UpdateTodo(TodoDto dto)
+        {
+            var todo = _todoContext.Todos.Find(dto.Id);
+
+            if (todo != null)
+            {
+                todo.Title = dto.Title;
+                todo.Description = dto.Description;
+                todo.Date = dto.Date;
+
+                _todoContext.SaveChanges();
+
+                return todo;
+            }
+            return todo;
+        }
     }
 }
