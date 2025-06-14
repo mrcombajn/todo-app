@@ -21,9 +21,10 @@ import VueDatePicker from '@vuepic/vue-datepicker';
       <section id="todo-header-datepicker">  
         <section> Wybierz dzień: </section>
         <VueDatePicker v-model="date" @update:modelValue="fetchTodos" auto-apply :enable-time-picker="false"/>
+        <button @click="triggerAddTodo">Dodaj zadanie</button>
       </section>
     </header>
-    <Todos :todos="todos" @deleteTodoFromDb="deleteTodo" @editTodoInDb="editTodo"/>
+    <Todos ref="todos" :todos="todos" @deleteTodoFromDb="deleteTodo" @editTodoInDb="editTodo"/>
   </main>
 </template>
 
@@ -51,7 +52,8 @@ import VueDatePicker from '@vuepic/vue-datepicker';
         }
       },
       prepareCorrectDate() {
-          var newDate =  this.date.getFullYear() + '-' + (this.date.getMonth() + 1) + '-' + this.date.getDate()
+          var month = this.date.getMonth() + 1 < 10 ? "0" + (this.date.getMonth() + 1) : this.date.getMonth() + 1
+          var newDate =  this.date.getFullYear() + '-' + month + '-' + this.date.getDate()
           return newDate
       },
       deleteTodo(id) {
@@ -68,20 +70,31 @@ import VueDatePicker from '@vuepic/vue-datepicker';
           description: todoData.description,
           date: this.prepareCorrectDate()
         }
-        console.log(JSON.stringify(dto, null, 2))
+
         try {
-          await axios.put('/api/todos',{ 
+          await axios.put('/api/todos', {
             id: id,
             title: todoData.title,
             description: todoData.description,
             date: this.prepareCorrectDate()
-          })
+          }).catch(error => console.log(error.response))
+
+          this.todos.map(todo =>
+            todo.id === id ? {
+              ...todo,
+              title: todoData.title,
+              description: todoData.description
+            } : todo
+          )
+
+          this.fetchTodos()
         } catch(error) {
           console.error('Błąd podczas pobierania danych:', error)
         }
-
-        this.fetchTodos()
       },
+      triggerAddTodo() {
+        this.$refs.todos.triggerAddTodo()
+      }
     },
     mounted() {
       this.fetchTodos()

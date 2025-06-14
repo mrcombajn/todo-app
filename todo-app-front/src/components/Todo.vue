@@ -14,8 +14,8 @@
       </template>
     </div>
     <div class="todo-actions" v-if="!isEditing">
-      <button class="edit-btn" @click="startEditing">✏️</button>
-      <button class="delete-btn" @click="$emit('deleteTodo')">🗑️</button>
+      <button class="edit-btn" @click="startEditing"><img src="./icons/edit.png" alt="Edit button icon"></button>
+      <button class="delete-btn" @click="$emit('emitDeleteTodo')">X</button>
     </div>
   </div>
 </template>
@@ -26,6 +26,7 @@
     data() {
       return {
         isEditing: false,
+        isAdding: false,
         editableTitle: this.title,
         editableDescription: this.description
       }

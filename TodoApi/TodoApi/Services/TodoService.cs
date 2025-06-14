@@ -57,9 +57,10 @@ namespace TodoApi.Services
 
             if (todo != null)
             {
-                var dbTodo = Todo.CreateTodoFromDto(dto);
+                todo.Title = dto.Title;
+                todo.Description = dto.Description;
+                todo.Date = dto.Date;
 
-                _todoContext.Update(dto);
                 _todoContext.SaveChanges();
 
                 return todo;
