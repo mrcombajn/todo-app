@@ -13,7 +13,7 @@ builder.Services.AddCors(options =>
 {
     options.AddPolicy("AllowFrontend", policy =>
     {
-        policy.WithOrigins("http://mostrom.cluster029.hosting.ovh.net/")
+        policy.WithOrigins("http://mostrom.cluster029.hosting.ovh.net")
             .AllowAnyHeader()
             .AllowAnyMethod();
     });
