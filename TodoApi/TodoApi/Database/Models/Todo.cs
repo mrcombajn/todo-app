@@ -1,6 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using TodoApi.Database.Dto;
-using TodoApi.Database.Enums;
 
 namespace TodoApi.Database.Models
 {
@@ -16,9 +15,9 @@ namespace TodoApi.Database.Models
 
         public DateOnly Date { get; set; }
 
-        public DateTime CreatedDate { get; set; }
+        public TimeOnly DueTime { get; set; }
 
-        public State State {  get; set; }
+        public bool IsDone { get; set; } = false;
 
         public static Todo CreateTodoFromDto(TodoDto dto)
         {
@@ -27,8 +26,8 @@ namespace TodoApi.Database.Models
                 Title = dto.Title,
                 Description = dto.Description,
                 Date = dto.Date,
-                State = State.ACTIVE,
-                CreatedDate = DateTime.UtcNow,
+                DueTime = dto.DueTime,
+                IsDone = dto.IsDone,
             };
         }
     }

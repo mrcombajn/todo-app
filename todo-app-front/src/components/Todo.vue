@@ -1,20 +1,18 @@
 <template>
   <div class="todo-item">
-    <div class="todo-content">
-      <template v-if="isEditing">
-        <input v-model="editableTitle" class="edit-input" />
-        <textarea v-model="editableDescription" class="edit-textarea"></textarea>
-        <button class="save-btn" @click="saveChanges">Zapisz</button>
-        <button class="cancel-btn" @click="cancelEdit">Anuluj</button>
-      </template>
-      <template v-else>
-        <h3 class="todo-title">{{ title }}</h3>
-        <p class="todo-description">{{ description }}</p>
-        <span class="todo-date">{{ date }}</span>
-      </template>
+    <div>
+        <input type="checkbox" :checked="localIsDone" @click="emitDoneTodo">
     </div>
-    <div class="todo-actions" v-if="!isEditing">
-      <button class="edit-btn" @click="startEditing"><img src="./icons/edit.png" alt="Edit button icon"></button>
+    <div class="todo-content">
+      <div>
+        <h3>{{ title }}</h3>
+        <p>{{ description }}</p>
+        <span>{{ date }}</span>
+        <span>{{ dueTime }}</span>
+      </div>
+    </div>
+    <div class="todo-actions" v-if="editable">
+      <button class="edit-btn" @click="editTodo"><img src="./icons/edit.png" alt="Edit button icon"></button>
       <button class="delete-btn" @click="$emit('emitDeleteTodo')">X</button>
     </div>
   </div>
@@ -23,29 +21,31 @@
 <script>
 
   export default {
-    props: ['title', 'description', 'date'],
+    props: ['editable', 'title', 'description', 'date', 'dueTime', 'isDone'],
     data() {
       return {
-        isEditing: false,
-        isAdding: false,
-        editableTitle: this.title,
-        editableDescription: this.description
+        localTitle: this.title ?? '',
+        localDescription: this.description ?? '',
+        localDate: this.date ?? '',
+        localDueTime: this.dueTime ?? '',
+        localIsDone: this.isDone
       }
     },
-      methods: {
-        startEditing() {
-          this.isEditing = true
-        },
-        cancelEdit() {
-          this.isEditing = false
-        },
-        saveChanges() {
-          this.isEditing = false
-          this.$emit('emitUpdateTodo', {
-            title: this.editableTitle,
-            description: this.editableDescription
-          })
-        }
+    methods: {
+      editTodo() {
+          let todo = {
+            title: this.localTitle,
+            description: this.localDescription,
+            date: this.localDate,
+            dueTime: this.localDueTime
+          }
+          
+          this.$emit('emitEditTodo', todo)
+      },
+      emitDoneTodo() {
+        this.localIsDone = !this.localIsDone
+        this.$emit('emitDoneTodo', this.isDone)
+      }
     }
   }
 </script>
@@ -57,7 +57,8 @@ main {
 }
 
 .todo-item {
-  min-width: 400px;
+  min-width: 300px;
+  max-width: 400px;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -114,6 +115,10 @@ main {
 .edit-btn:hover {
   color: #2563eb;
   transform: scale(1.1);
+}
+
+span {
+  margin-right: 1rem;
 }
 
 .delete-btn:hover {

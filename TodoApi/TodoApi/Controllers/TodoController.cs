@@ -20,7 +20,7 @@ namespace TodoApi.Controllers
         [HttpGet]
         public ActionResult GetTodosByDate(DateOnly date)
         {
-            return Ok(todoService.GetActiveTodosByDate(date));
+            return Ok(todoService.getTodosByDate(date));
         }
 
         [HttpPost]
@@ -29,7 +29,7 @@ namespace TodoApi.Controllers
         [HttpDelete]
         public ActionResult RemoveTodoById(int id)
         {
-            return Ok(todoService.RemoveTodoById(id));
+            return todoService.RemoveTodoById(id) ? Ok() : BadRequest("There's no entity with given id.");
         }
 
         [HttpPut]
@@ -37,5 +37,9 @@ namespace TodoApi.Controllers
         {
             return Ok(todoService.UpdateTodo(dto));
         }
+
+        [HttpPut("{id}")]
+        public ActionResult MarkTodoAsDone(int id) => todoService.UpdateTodoDone(id) ? Ok() : BadRequest("There's no entity with given id.");
+
     }
 }
