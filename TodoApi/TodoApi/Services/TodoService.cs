@@ -1,6 +1,5 @@
 ﻿using TodoApi.Database;
 using TodoApi.Database.Dto;
-using TodoApi.Database.Enums;
 using TodoApi.Database.Models;
 
 namespace TodoApi.Services
@@ -14,14 +13,9 @@ namespace TodoApi.Services
             _todoContext = todoContext;
         }
 
-        public List<Todo> GetAllTodosByDate(DateOnly date)
+        public List<Todo> getTodosByDate(DateOnly date)
         {
-            return _todoContext.Todos.ToList();
-        }
-
-        public List<Todo> GetActiveTodosByDate(DateOnly date)
-        {
-            return GetTodosByState(State.ACTIVE)
+            return _todoContext.Todos
                 .Where(todo => todo.Date == date)
                 .ToList();
         }
@@ -37,7 +31,7 @@ namespace TodoApi.Services
         }
 
 
-        public Todo RemoveTodoById(int id)
+        public bool RemoveTodoById(int id)
         {
             var todo = _todoContext.Todos.Find(id);
 
@@ -45,11 +39,45 @@ namespace TodoApi.Services
             {
                 _todoContext.Remove(todo);
                 _todoContext.SaveChanges();
+
+                return true;
             }
-            return todo;
+            return false;
         }
 
-        private IQueryable<Todo> GetTodosByState(State state) => _todoContext.Todos.Where(todo => todo.State == state);
+        public TodoDto UpdateTodo(TodoDto dto)
+        {
+            var todo = _todoContext.Todos.Find(dto.Id);
 
+            if (todo != null)
+            {
+                todo.Title = dto.Title;
+                todo.Description = dto.Description;
+                todo.Date = dto.Date;
+                todo.DueTime = dto.DueTime;
+
+                _todoContext.SaveChanges();
+
+                return dto;
+            }
+
+            return dto;
+        }
+
+        public bool UpdateTodoDone(int id)
+        {
+            var todo = _todoContext.Todos.Find(id);
+
+            if (todo != null)
+            {
+                todo.IsDone = !todo.IsDone;
+
+                _todoContext.SaveChanges();
+
+                return true;
+            }
+
+            return false;
+        }
     }
 }
