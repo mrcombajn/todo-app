@@ -9,6 +9,16 @@ string connctionString = builder.Configuration.GetConnectionString("DefaultConne
 builder.Services.AddDbContext<TodoContext>(db => db.UseNpgsql(connctionString));
 builder.Services.AddScoped<TodoService>();
 
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy("AllowFrontend", policy =>
+    {
+        policy.WithOrigins("http://mostrom.cluster029.hosting.ovh.net/")
+            .AllowAnyHeader()
+            .AllowAnyMethod();
+    });
+});
+
 
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
@@ -32,6 +42,7 @@ if (app.Environment.IsDevelopment())
 app.UseHttpsRedirection();
 
 app.UseAuthorization();
+app.UseCors("AllowFrontend");
 
 app.MapControllers();
 

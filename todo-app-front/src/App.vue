@@ -11,9 +11,9 @@ import Notifications from './components/Notifications.vue';
 <template>
   <nav>
     <section id="title">Todo list by Mateusz Ostrowski</section>
-    <section>
+    <!--<section>
       <Notifications :todos="todos"/>
-    </section>
+    </section>-->
   </nav>
 
   <main>
@@ -34,16 +34,18 @@ import Notifications from './components/Notifications.vue';
     data() {
       return {
         todos: [],
-        date: new Date()
+        date: new Date(),
+        apiUrl: import.meta.env.VITE_API_URL
       }
     },
     components: {
-      Todos
+      Todos,
+      Notifications
     },
     methods: {
       async fetchTodos() {
         try {
-          const response = await axios.get('/api/todos', {
+          const response = await axios.get(`${import.meta.env.VITE_API_URL}/todos`, {
               params: { date: this.prepareCorrectDate() }
           })
 
@@ -59,7 +61,7 @@ import Notifications from './components/Notifications.vue';
           return newDate
       },
       deleteTodo(id) {
-        axios.delete('api/todos', {
+        axios.delete(`${import.meta.env.VITE_API_URL}/todos`, {
           params: { id: id }
         })
 
@@ -74,7 +76,7 @@ import Notifications from './components/Notifications.vue';
         }
 
         try {
-          await axios.put('/api/todos', {
+          await axios.put(`${import.meta.env.VITE_API_URL}/todos`, {
             id: id,
             title: todoData.title,
             description: todoData.description,
@@ -96,13 +98,13 @@ import Notifications from './components/Notifications.vue';
       },
       async saveTodo(title, description) {
         try {
-          await axios.post('/api/todos', {
+          var todo = await axios.post(`${import.meta.env.VITE_API_URL}/todos`, {
             title: title,
             description: description,
             date: this.prepareCorrectDate()
           })
 
-          this.fetchTodos()
+          this.todos.push(todo.data)
         } catch(error) {
           console.error('Błąd podczas zapisywania danych:', error)
         }
@@ -122,6 +124,7 @@ import Notifications from './components/Notifications.vue';
 </script>
 
 <style scoped>
+
 nav {
   display: inline-flex;
   margin: 0;
