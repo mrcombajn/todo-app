@@ -2,30 +2,30 @@
 
 import { ref, onMounted } from 'vue'
 import axios from 'axios'
-import Todo from './components/Todo.vue';
+import Todos from './components/Todos.vue';
+import VueDatePicker from '@vuepic/vue-datepicker';
+import Notifications from './components/Notifications.vue';
 
 </script>
 
 <template>
   <nav>
     <section id="title">Todo list by Mateusz Ostrowski</section>
-    <section id="image">
-      <input type="text" value="Wpisz date"/>
-      <button v-on:click="fetchTodos">Klik</button>
-      <img src="./components/icons/bell.png" alt="notification-icon">
-    </section>
+    <!--<section>
+      <Notifications :todos="todos"/>
+    </section>-->
   </nav>
 
-  <main id="main">
-    <section v-if="todos.length == 0">Ups! niczego tutaj nie ma :/ Dodaj nowe zadanie</section>
-    <section v-else>
-      <Todo v-for="todo in todos"
-         :title="todo.title"
-         :description="todo.description"
-         :date="todo.date"
-         v-on:emitDeleteTodo="deleteTodo(todo.id)"
-         v-on:emitEditTodo="editTodo"></Todo>
-    </section>
+  <main>
+    <header id="todo-header">
+      <h1>Zadania</h1>
+      <section id="todo-header-datepicker">  
+        <section> Wybierz dzień: </section>
+        <VueDatePicker v-model="date" @update:modelValue="fetchTodos" auto-apply/>
+        <button @click="triggerAddTodo">Dodaj zadanie</button>
+      </section>
+    </header>
+    <Todos ref="todos" :todos="todos" @deleteTodoFromDb="deleteTodo" @editTodoInDb="editTodo" @saveTodoInDb="saveTodo" />
   </main>
 </template>
 
@@ -33,39 +33,98 @@ import Todo from './components/Todo.vue';
   export default {
     data() {
       return {
-        todos: []
+        todos: [],
+        date: new Date(),
+        apiUrl: import.meta.env.VITE_API_URL
       }
     },
     components: {
-      Todo
+      Todos,
+      Notifications
     },
     methods: {
       async fetchTodos() {
         try {
-          const response = await axios.get('/api/todos', {
-              params: { date: '2025-06-13' }
+          const response = await axios.get(`${import.meta.env.VITE_API_URL}/todos`, {
+              params: { date: this.prepareCorrectDate() }
           })
+
           this.todos = response.data
         }
         catch (error) {
           console.error('Błąd podczas pobierania danych:', error)
         }
       },
+      prepareCorrectDate() {
+          var month = this.date.getMonth() + 1 < 10 ? "0" + (this.date.getMonth() + 1) : this.date.getMonth() + 1
+          var newDate =  this.date.getFullYear() + '-' + month + '-' + this.date.getDate()
+          return newDate
+      },
       deleteTodo(id) {
-        axios.delete('api/todos', {
+        axios.delete(`${import.meta.env.VITE_API_URL}/todos`, {
           params: { id: id }
         })
 
         this.todos = this.todos.filter(item => item.id != id)
       },
-      editTodo() {
-        
+      async editTodo(id, todoData) {
+        const dto = {
+          id: id,
+          title: todoData.title,
+          description: todoData.description,
+          date: this.prepareCorrectDate()
+        }
+
+        try {
+          await axios.put(`${import.meta.env.VITE_API_URL}/todos`, {
+            id: id,
+            title: todoData.title,
+            description: todoData.description,
+            date: this.prepareCorrectDate()
+          })
+
+          this.todos.map(todo =>
+            todo.id === id ? {
+              ...todo,
+              title: todoData.title,
+              description: todoData.description
+            } : todo
+          )
+
+          this.fetchTodos()
+        } catch(error) {
+          console.error('Błąd podczas pobierania danych:', error)
+        }
+      },
+      async saveTodo(title, description) {
+        try {
+          var todo = await axios.post(`${import.meta.env.VITE_API_URL}/todos`, {
+            title: title,
+            description: description,
+            date: this.prepareCorrectDate()
+          })
+
+          this.todos.push(todo.data)
+        } catch(error) {
+          console.error('Błąd podczas zapisywania danych:', error)
+        }
+      },
+      checkUpcomingTasks() {
+
+      },
+      triggerAddTodo() {
+        this.$refs.todos.triggerAddTodo()
       }
-    } 
+    },
+    mounted() {
+      this.fetchTodos()
+      this.interval = setInterval(this.checkUpcomingTasks, 60000)
+    }
   }
 </script>
 
 <style scoped>
+
 nav {
   display: inline-flex;
   margin: 0;
@@ -75,20 +134,11 @@ nav {
   color: black;
 }
 
-section {
-  padding: 10px;
-  letter-spacing: 1.5px;
-}
-
 section#title {
   color: white;
   width: 25%;
-}
-
-section#image {
-  display: flex;
-  justify-content: flex-end;
-  width: 75%;
+  padding: 10px;
+  letter-spacing: 1.5px;
 }
 
 section > img {
@@ -98,8 +148,25 @@ section > img {
 
 main {
   display: flex;
-  justify-content: center;
+  flex-direction: column;
+  width: 70%;
+  margin-left: auto;
+  margin-right: auto;
+  align-items: center;
   color: black;
+  justify-content: flex-start;
+}
+
+#todo-header {
+  display: flex;
+  flex-direction: column;
+}
+
+#todo-header-datepicker {
+  display: flex;
+  align-items: center;
+  flex-direction: row;
+  -ms-flex-align: end;
 }
 
 </style>
