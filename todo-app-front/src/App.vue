@@ -105,8 +105,7 @@ import Modal from './components/Modal.vue'
         try {
           await axios.put(`${import.meta.env.VITE_API_URL}/todos`, dto)
 
-          console.log(dto)
-          this.todos.map(todo =>
+          this.todos = this.todos.map(todo =>
             todo.id === dto.id ? {
               ...todo,
               title: dto.title,

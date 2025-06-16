@@ -45,8 +45,6 @@ import VueDatePicker from '@vuepic/vue-datepicker';
           date: this.editableDate,
         }
 
-        console.log(todo)
-
         this.$emit('addTodo', todo)
       },
       editTodo() {
