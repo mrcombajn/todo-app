@@ -152,7 +152,8 @@ import Modal from './components/Modal.vue'
       checkUpcomingTasks() {
           let upcomingTodos = this.todos.filter(todo => {
             let minutes = new Date() - new Date(todo.date)
-            return (minutes / 60000) < 15 && !todo.isDone
+            
+            return (minutes / 60000) < 15 && (minutes / 60000) > 0 && !todo.isDone
           })
 
           if(upcomingTodos.length > 0)
