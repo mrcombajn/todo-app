@@ -3,7 +3,6 @@
 import axios from 'axios'
 import Todos from './components/Todos.vue';
 import VueDatePicker from '@vuepic/vue-datepicker';
-import Notifications from './components/Notifications.vue';
 import Modal from './components/Modal.vue'
 
 </script>
@@ -11,9 +10,6 @@ import Modal from './components/Modal.vue'
 <template>
   <nav>
     <section id="title">Todo list by Mateusz Ostrowski</section>
-    <!--<section>
-      <Notifications :todos="todos"/>
-    </section>-->
   </nav>
 
   <main>
@@ -36,20 +32,30 @@ import Modal from './components/Modal.vue'
       <section class="todos">
         <h2 class="header-text">Aktualne zadania</h2>
         <Todos ref="todos"
-           :todos="todos"
-           :editable="true"
-            @deleteTodoFromDb="deleteTodo"
-             @emitTriggerEditTodo="triggerEditTodo"
-              @saveTodoInDb="saveTodo"
-               @doneTodoInDb="doneTodo"/>
+          :todos="activeTodos"
+          :editable="true"
+          :message="'Skąd to zwątpienie?'"
+          @deleteTodoFromDb="deleteTodo"
+          @emitTriggerEditTodo="triggerEditTodo"
+          @doneTodoInDb="doneTodo"/>
       </section>
       <section class="todos">
         <h2 class="header-text">Zadania wykonane</h2>
-        <Todos :todos="doneTodos" :editable="false"/>
+        <Todos
+          :todos="doneTodos"
+          :message="'Dasz radę! Wykonaj jeszcze parę tasków'"
+          :editable="false"
+          @doneTodoInDb="doneTodo"/>
       </section>
       <section class="todos">
         <h2 class="header-text">Spóźnione zadania</h2>
-        <Todos :todos="outdatedTodos"/>
+        <Todos
+         :todos="outdatedTodos"
+         :message="'Całe szczęście nic tutaj nie ma'"
+         :editable="true"
+          @deleteTodoFromDb="deleteTodo"
+          @emitTriggerEditTodo="triggerEditTodo"
+          @doneTodoInDb="doneTodo"/>
       </section>
     </section>
   </main>
@@ -60,6 +66,7 @@ import Modal from './components/Modal.vue'
     data() {
       return {
         todos: [],
+        activeTodos: [],
         doneTodos: [],
         outdatedTodos: [],
         isAddingTodo: false,
@@ -70,27 +77,21 @@ import Modal from './components/Modal.vue'
     },
     components: {
       Todos,
-      Notifications,
       Modal
     },
     methods: {
       async fetchTodos() {
         try {
           const response = await axios.get(`${import.meta.env.VITE_API_URL}/todos`, {
-              params: { date: this.prepareCorrectDate() }
+              params: { date: this.date }
           })
+          this.todos = response.data
 
-          this.todos = response.data.filter(todo => !todo.isDone)
-          this.doneTodos = response.data.filter(todo => todo.isDone === true)
+          this.updateTodoArrays()
         }
         catch (error) {
           console.error('Błąd podczas pobierania danych:', error)
         }
-      },
-      prepareCorrectDate() {
-          var month = this.date.getMonth() + 1 < 10 ? "0" + (this.date.getMonth() + 1) : this.date.getMonth() + 1
-          var newDate =  this.date.getFullYear() + '-' + month + '-' + this.date.getDate()
-          return newDate
       },
       deleteTodo(id) {
         axios.delete(`${import.meta.env.VITE_API_URL}/todos`, {
@@ -98,20 +99,19 @@ import Modal from './components/Modal.vue'
         })
 
         this.todos = this.todos.filter(item => item.id != id)
+        this.updateTodoArrays()
       },
       async editTodo(dto) {
         this.isEditingTodo = false
         try {
           await axios.put(`${import.meta.env.VITE_API_URL}/todos`, dto)
 
-          console.log(dto)
-          this.todos.map(todo =>
+          this.todos = this.todos.map(todo =>
             todo.id === dto.id ? {
               ...todo,
               title: dto.title,
               description: dto.description,
               date: dto.date,
-              dueTime: dto.dueTime
             } : todo
           )
 
@@ -120,11 +120,17 @@ import Modal from './components/Modal.vue'
           console.error('Błąd podczas pobierania danych:', error)
         }
       },
-      async doneTodo(id, todoDone) {
+      async doneTodo(id) {
         try {
           await axios.put(`${import.meta.env.VITE_API_URL}/todos/${id}`)
 
-          this.fetchTodos()
+          this.todos = this.todos.map(todo =>
+            todo.id === id ? {
+              ...todo,
+              isDone: !todo.isDone
+            } : todo
+          )
+          this.updateTodoArrays()
 
         } catch(error) {
           console.error('Błąd podczas pobierania danych:', error)
@@ -132,26 +138,42 @@ import Modal from './components/Modal.vue'
       },
       async saveTodo(todo) {
         this.isAddingTodo = false
+
         try {
           var todo = await axios.post(`${import.meta.env.VITE_API_URL}/todos`, todo)
 
           this.todos.push(todo.data)
+
+          this.updateTodoArrays()
         } catch(error) {
           console.error('Błąd podczas zapisywania danych:', error)
         }
       },
       checkUpcomingTasks() {
+          let upcomingTodos = this.todos.filter(todo => {
+            let minutes = new Date() - new Date(todo.date)
+            
+            return (minutes / 60000) < 15 && (minutes / 60000) > 0 && !todo.isDone
+          })
 
+          if(upcomingTodos.length > 0)
+            alert("Masz " + upcomingTodos.length + " zadań do wykonania")
+
+          this.updateTodoArrays()
+      },
+      updateTodoArrays() {
+          this.activeTodos = this.todos.filter(todo => !todo.isDone && new Date() < new Date(todo.date))
+          this.doneTodos = this.todos.filter(todo => todo.isDone)
+          this.outdatedTodos = this.todos.filter(todo => !todo.isDone && new Date() > new Date(todo.date))
       },
       triggerAddTodo() {
         this.editData = {
-          date: this.prepareCorrectDate(),
-          dueTime: new Date()
+          date: this.date
         }
+
         this.isAddingTodo = true
       },
       triggerEditTodo(id, todoData) {
-        console.log(todoData)
         let fullTodoData = {
           id: id,
           ...todoData
@@ -226,4 +248,7 @@ main {
   flex-direction: row;
 }
 
+.todos {
+  width: 33%;
+}
 </style>

@@ -13,9 +13,7 @@ namespace TodoApi.Database.Models
         [Required]
         public string Description { get; set; }
 
-        public DateOnly Date { get; set; }
-
-        public TimeOnly DueTime { get; set; }
+        public DateTime Date { get; set; }
 
         public bool IsDone { get; set; } = false;
 
@@ -26,7 +24,6 @@ namespace TodoApi.Database.Models
                 Title = dto.Title,
                 Description = dto.Description,
                 Date = dto.Date,
-                DueTime = dto.DueTime,
                 IsDone = dto.IsDone,
             };
         }
