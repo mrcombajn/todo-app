@@ -13,10 +13,13 @@ namespace TodoApi.Services
             _todoContext = todoContext;
         }
 
-        public List<Todo> getTodosByDate(DateOnly date)
+        public List<Todo> getTodosByDate(DateTime date)
         {
             return _todoContext.Todos
-                .Where(todo => todo.Date == date)
+                .Where(todo =>
+                    todo.Date.Year == date.Year && 
+                    todo.Date.Month == date.Month &&
+                    todo.Date.Day == date.Day)
                 .ToList();
         }
 
@@ -54,7 +57,6 @@ namespace TodoApi.Services
                 todo.Title = dto.Title;
                 todo.Description = dto.Description;
                 todo.Date = dto.Date;
-                todo.DueTime = dto.DueTime;
 
                 _todoContext.SaveChanges();
 

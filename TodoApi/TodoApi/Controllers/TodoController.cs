@@ -18,7 +18,7 @@ namespace TodoApi.Controllers
         }
 
         [HttpGet]
-        public ActionResult GetTodosByDate(DateOnly date)
+        public ActionResult GetTodosByDate(DateTime date)
         {
             return Ok(todoService.getTodosByDate(date));
         }

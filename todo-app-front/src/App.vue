@@ -76,6 +76,7 @@ import Modal from './components/Modal.vue'
     methods: {
       async fetchTodos() {
         try {
+          console.log(this.date)
           const response = await axios.get(`${import.meta.env.VITE_API_URL}/todos`, {
               params: { date: this.prepareCorrectDate() }
           })

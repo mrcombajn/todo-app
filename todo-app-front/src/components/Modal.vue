@@ -13,7 +13,7 @@ import VueDatePicker from '@vuepic/vue-datepicker';
           <p>Opis:</p>
           <textarea v-model="editableDescription" placeholder="Opis"></textarea>
           <p>Data wykonania: <VueDatePicker v-model="editableDate" auto-apply :enable-time-picker="false"/></p>
-          <p>Do godziny: <VueDatePicker v-model="editableDueTime" auto-apply time-picker/></p>
+          <p>Do godziny: <VueDatePicker v-model="editableDueTime" @update:model-value="val => console.log('Updated time:', typeof val)" auto-apply time-picker format="HH:mm:ss"/></p>
           <div>
             <button class="modal-btn" v-if="isAdding" @click="addTodo">Dodaj zadanie</button>
             <button class="modal-btn" v-else @click="editTodo">Edytuj zadanie</button>
@@ -33,7 +33,7 @@ import VueDatePicker from '@vuepic/vue-datepicker';
         editableTitle: '',
         editableDescription: '',
         editableDate: '',
-        editableDueTime: ''
+        editableDueTime: new Date()
       }
     },
     components: {
@@ -68,6 +68,19 @@ import VueDatePicker from '@vuepic/vue-datepicker';
         }
         
         this.$emit('editTodo', todo)
+      },
+      prepareTimeForDatePickerFromString(str) {
+        if (typeof timeStr === 'string') {
+
+          console.log(typeof str)
+          let splitted = str.split(':')
+
+          return {
+            hour: splitted[0],
+            minutes:splitted[1],
+            seconds: splitted[2]
+          }
+        }
       }
     },
     watch: {
@@ -76,7 +89,7 @@ import VueDatePicker from '@vuepic/vue-datepicker';
           this.editableTitle = newData?.title ?? ''
           this.editableDescription = newData?.description ?? ''
           this.editableDate = newData?.date ?? new Date()
-          this.editableDueTime = new Date()
+          this.editableDueTime = this.prepareTimeForDatePickerFromString(newData?.dueTime) ?? new Date()
         },
         immediate: true
       }
