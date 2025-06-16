@@ -99,6 +99,7 @@ import Modal from './components/Modal.vue'
         })
 
         this.todos = this.todos.filter(item => item.id != id)
+        this.updateTodoArrays()
       },
       async editTodo(dto) {
         this.isEditingTodo = false
@@ -246,4 +247,7 @@ main {
   flex-direction: row;
 }
 
+.todos {
+  width: 33%;
+}
 </style>
