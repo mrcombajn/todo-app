@@ -8,7 +8,6 @@
         <h3>{{ title }}</h3>
         <p>{{ description }}</p>
         <span>{{ date }}</span>
-        <span>{{ dueTime }}</span>
       </div>
     </div>
     <div class="todo-actions" v-if="editable">
@@ -21,13 +20,12 @@
 <script>
 
   export default {
-    props: ['editable', 'title', 'description', 'date', 'dueTime', 'isDone'],
+    props: ['editable', 'title', 'description', 'date', 'isDone'],
     data() {
       return {
         localTitle: this.title ?? '',
         localDescription: this.description ?? '',
         localDate: this.date ?? '',
-        localDueTime: this.dueTime ?? '',
         localIsDone: this.isDone
       }
     },
@@ -37,14 +35,13 @@
             title: this.localTitle,
             description: this.localDescription,
             date: this.localDate,
-            dueTime: this.localDueTime
           }
           
           this.$emit('emitEditTodo', todo)
       },
       emitDoneTodo() {
         this.localIsDone = !this.localIsDone
-        this.$emit('emitDoneTodo', this.isDone)
+        this.$emit('emitDoneTodo')
       }
     }
   }

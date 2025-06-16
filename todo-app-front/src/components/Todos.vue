@@ -1,17 +1,16 @@
 <template>
     <main>
-        <section v-if="todos.length == 0">Ups! niczego tutaj nie ma :/</section>
+        <section v-if="todos.length == 0">{{ message }}</section>
         <section v-else>
             <Todo v-for="todo in todos"
                 :title="todo.title"
                 :description="todo.description"
                 :date="todo.date"
                 :isDone="todo.isDone"
-                :dueTime="todo.dueTime"
                 :editable="editable"
                 @emitDeleteTodo="$emit('deleteTodoFromDb', todo.id)"
                 @emitEditTodo="(todoData) => $emit('emitTriggerEditTodo', todo.id, todoData)"
-                @emitDoneTodo="(todoDone) => $emit('doneTodoInDb', todo.id, todoDone)"
+                @emitDoneTodo="(todoDone) => $emit('doneTodoInDb', todo.id)"
                 />
         </section>
     </main>
@@ -21,7 +20,7 @@
     import Todo from './Todo.vue';
 
     export default {
-        props: ['todos', 'editable'],
+        props: ['todos', 'editable', 'message'],
         components: {
             Todo
         },
