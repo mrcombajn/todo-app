@@ -1,19 +1,18 @@
 <template>
-    <main>
-        <section v-if="todos.length == 0">{{ message }}</section>
-        <section v-else>
-            <Todo v-for="todo in todos"
-                :title="todo.title"
-                :description="todo.description"
-                :date="todo.date"
-                :isDone="todo.isDone"
-                :editable="editable"
-                @emitDeleteTodo="$emit('deleteTodoFromDb', todo.id)"
-                @emitEditTodo="(todoData) => $emit('emitTriggerEditTodo', todo.id, todoData)"
-                @emitDoneTodo="(todoDone) => $emit('doneTodoInDb', todo.id)"
-                />
-        </section>
-    </main>
+    <section class="todos-empty-text" v-if="todos.length == 0">{{ message }}</section>
+    <section v-else>
+        <Todo class="todo-item"
+            v-for="todo in todos"
+            :title="todo.title"
+            :description="todo.description"
+            :date="todo.date"
+            :isDone="todo.isDone"
+            :editable="editable"
+            @emitDeleteTodo="$emit('deleteTodoFromDb', todo.id)"
+            @emitEditTodo="(todoData) => $emit('emitTriggerEditTodo', todo.id, todoData)"
+            @emitDoneTodo="(todoDone) => $emit('doneTodoInDb', todo.id)"
+            />
+    </section>
 </template>
 
 <script>
@@ -29,8 +28,10 @@
 
 <style lang="css" scoped>
 
-main {
-    padding: 20px;
+.todo-item {
+    display: flex;
+    justify-content: center;
+    width: 90%;
 }
 
 </style>
