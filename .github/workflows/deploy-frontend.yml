@@ -1,0 +1,38 @@
+name: Deploy Vue App to FTP
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout Code
+      uses: actions/checkout@v3
+
+   - name: Set working directory
+      working-directory: ./todo-app-front
+      run: echo "Moved to todo-app-front"
+      
+    - name: Set up Node.js
+      uses: actions/setup-node@v3
+      with:
+        node-version: '18'
+
+    - name: Install Dependencies
+      run: npm install
+
+    - name: Build Vue App
+      run: npm run build
+
+    - name: Upload via FTP
+      uses: SamKirkland/FTP-Deploy-Action@v4
+      with:
+        server: ${{ secrets.FTP_ADDRESS }}
+        username: ${{ secrets.FTP_USER }}
+        password: ${{ secrets.FTP_PASS }}
+        local-dir: todo-app-front/dist/
+        server-dir: ${{ secrets.FTP_REMOTE_DIR}}
