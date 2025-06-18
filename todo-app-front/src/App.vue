@@ -28,10 +28,10 @@ import Modal from './components/Modal.vue'
         <button @click="triggerAddTodo">Dodaj zadanie</button>
       </section>
     </header>
-    <section class="tasks">
+    <section class="todos-container">
       <section class="todos">
         <h2 class="header-text">Aktualne zadania</h2>
-        <Todos ref="todos"
+        <Todos
           :todos="activeTodos"
           :editable="true"
           :message="'Skąd to zwątpienie?'"
@@ -150,15 +150,17 @@ import Modal from './components/Modal.vue'
         }
       },
       checkUpcomingTasks() {
-          let upcomingTodos = this.todos.filter(todo => {
-            let milliseconds = new Date(todo.date) - new Date()
+          let todosTodo = this.todos.filter(todo => {
+            let todoDate = new Date(todo.date)
+            let currentDate = new Date()
+            let milliseconds = todoDate - currentDate
             let diffMinutes = milliseconds / 60000
 
-            return diffMinutes <= 15 && diffMinutes >= 0 && !todo.isDone
+            return (diffMinutes <= 15 && diffMinutes >= 0 || currentDate > todoDate) && !todo.isDone
           })
 
-          if(upcomingTodos.length > 0)
-            alert("Masz " + upcomingTodos.length + " zadań do wykonania")
+          //if(todosTodo.length > 0)
+            //alert("Masz " + todosTodo.length + " zadań do wykonania")
 
           this.updateTodoArrays()
       },
@@ -244,12 +246,35 @@ main {
   text-align: center;
 }
 
-.tasks {
+.todos-container {
   display: flex;
   flex-direction: row;
 }
 
 .todos {
+  display: flex;
+  flex-direction: column;
   width: 33%;
+}
+
+@media (min-width: 1024px) {
+  main {
+    width: 70%;
+  }
+  
+  .todos-container {
+    flex-direction: row;
+    justify-content: space-around;
+    width: 100%;
+  }
+
+}
+
+@media (max-width: 1024px) {
+  main {
+    width: 100%;
+    justify-content: center;
+  }
+  
 }
 </style>

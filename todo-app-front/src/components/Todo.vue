@@ -49,13 +49,7 @@
 
 <style scoped>
 
-main {
-  padding: 20px;
-}
-
 .todo-item {
-  min-width: 300px;
-  max-width: 400px;
   display: flex;
   justify-content: space-between;
   align-items: center;
