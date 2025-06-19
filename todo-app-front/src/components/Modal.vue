@@ -5,21 +5,19 @@ import VueDatePicker from '@vuepic/vue-datepicker';
 <template>
     <main v-if="isAdding || isEditing">
       <div class="modal-backdrop">
-      <div class="modal">
-          <h2 v-if="isAdding">Nowe Zadanie</h2>
-          <h2 v-else="isAdding">Edytuj Zadanie</h2>
-          <p>Tytuł:</p>
-          <input v-model="editableTitle" placeholder="Tytuł" />
-          <p>Opis:</p>
-          <textarea v-model="editableDescription" placeholder="Opis"></textarea>
-          <p>Data wykonania: <VueDatePicker v-model="editableDate" :enable-time-picker="true"/></p>
-          <div>
-            <button class="modal-btn" v-if="isAdding" @click="addTodo">Dodaj zadanie</button>
-            <button class="modal-btn" v-else @click="editTodo">Edytuj zadanie</button>
+        <div class="modal">
+            <h2 v-if="isAdding">Nowe Zadanie</h2>
+            <h2 v-else="isAdding">Edytuj Zadanie</h2>
+            <input type="text" v-model="editableTitle" placeholder="Tytuł" />
+            <textarea v-model="editableDescription" placeholder="Opis"></textarea>
+            Data wykonania: <VueDatePicker v-model="editableDate"/>
+            <div>
+              <button class="modal-btn" v-if="isAdding" @click="addTodo">Dodaj zadanie</button>
+              <button class="modal-btn" v-else @click="editTodo">Edytuj zadanie</button>
 
-            <button class="modal-btn" @click="$emit('cancelOperation')">Zamknij</button>
-          </div>
-      </div>
+              <button class="modal-btn" @click="$emit('cancelOperation')">Zamknij</button>
+            </div>
+        </div>
       </div> 
     </main>
 </template>
@@ -32,6 +30,7 @@ import VueDatePicker from '@vuepic/vue-datepicker';
         editableTitle: '',
         editableDescription: '',
         editableDate: '',
+        validation: false
       }
     },
     components: {
@@ -63,7 +62,7 @@ import VueDatePicker from '@vuepic/vue-datepicker';
         handler(newData) {
           this.editableTitle = newData?.title ?? ''
           this.editableDescription = newData?.description ?? ''
-          this.editableDate = newData?.date ?? new Date()
+          this.editableDate = newData?.date ?? ''
         },
         immediate: true
       }
@@ -84,6 +83,22 @@ import VueDatePicker from '@vuepic/vue-datepicker';
 }
 
 
+input[type="text"],
+textarea,
+input[type="date"] {
+  width: 100%;
+  padding: 8px;
+  font-size: 14px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  box-sizing: border-box;
+  margin-bottom: 16px;
+}
+
+textarea{
+  resize: vertical;
+}
+
 .modal {
   background-color: white;
   padding: 2rem;
@@ -95,7 +110,6 @@ import VueDatePicker from '@vuepic/vue-datepicker';
   position: relative;
 }
 
-
 .modal-btn {
   margin-top: 1rem;
   margin-right: 1rem;
@@ -105,6 +119,12 @@ import VueDatePicker from '@vuepic/vue-datepicker';
   border: none;
   border-radius: 6px;
   cursor: pointer;
+  transition: 0.5s;
+}
+
+.modal-btn:hover {
+  background-color: #1364f0;
+
 }
 
 </style>
