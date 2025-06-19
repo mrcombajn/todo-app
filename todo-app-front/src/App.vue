@@ -142,9 +142,15 @@ import Modal from './components/Modal.vue'
         try {
           var todo = await axios.post(`${import.meta.env.VITE_API_URL}/todos`, todo)
 
-          this.todos.push(todo.data)
+          let todoDate = new Date(todo.data.date)
 
-          this.updateTodoArrays()
+          if(todoDate.getFullYear() == this.date.getFullYear() &&
+            todoDate.getMonth() == this.date.getMonth() &&
+            todoDate.getDate() == this.date.getDate()
+          ){
+            this.todos.push(todo.data)
+            this.updateTodoArrays()
+          }
         } catch(error) {
           console.error('Błąd podczas zapisywania danych:', error)
         }
@@ -159,8 +165,8 @@ import Modal from './components/Modal.vue'
             return (diffMinutes <= 15 && diffMinutes >= 0 || currentDate > todoDate) && !todo.isDone
           })
 
-          //if(todosTodo.length > 0)
-            //alert("Masz " + todosTodo.length + " zadań do wykonania")
+          if(todosTodo.length > 0)
+            alert("Masz " + todosTodo.length + " zadań do wykonania")
 
           this.updateTodoArrays()
       },
@@ -171,7 +177,7 @@ import Modal from './components/Modal.vue'
       },
       triggerAddTodo() {
         this.editData = {
-          date: this.date
+          date: new Date()
         }
 
         this.isAddingTodo = true
