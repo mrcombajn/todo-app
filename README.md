@@ -30,12 +30,10 @@ The task is to write an application entitled. ‘Todo List’
 
 
 #### Plans for the future: 
-- [] Add users to database, so each one will have own board
+- [ ] Add users to database, so each one will have own board
 
 
 ### Running an application:
-
-Download executable .jar file and run following command: 
 
 Running the project locally requires Docker to be installed:
 In the path /TodoApi/TodoApi type the command:
