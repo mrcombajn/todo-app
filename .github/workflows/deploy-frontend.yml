@@ -8,14 +8,13 @@ on:
 jobs:
   deploy:
     runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: ./todo-app-front
 
     steps:
     - name: Checkout Code
       uses: actions/checkout@v3
-
-    - name: Set working directory
-      working-directory: ./todo-app-front
-      run: echo "Moved to todo-app-front"
       
     - name: Set up Node.js
       uses: actions/setup-node@v3
@@ -26,7 +25,6 @@ jobs:
       run: npm install
 
     - name: Build Vue App
-      working-directory: ./todo-app-front
       run: npm run build
 
     - name: Upload via FTP
