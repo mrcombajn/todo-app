@@ -26,6 +26,7 @@ jobs:
       run: npm install
 
     - name: Build Vue App
+      working-directory: ./todo-app-front
       run: npm run build
 
     - name: Upload via FTP
